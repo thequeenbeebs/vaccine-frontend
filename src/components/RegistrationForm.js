@@ -4,7 +4,7 @@ class RegistrationForm extends React.Component {
     render() {
         return (
             <div>
-                Registration Form Goes Here
+                <h2>Register for COVID-19 Vaccine</h2>
             </div>
         )
     }

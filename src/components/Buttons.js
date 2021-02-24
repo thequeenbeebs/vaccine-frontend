@@ -5,7 +5,7 @@ const Buttons = (props) => {
         <div>
             <h2>Welcome to the Harris County Vaccine Hub</h2>
             <button onClick={() => props.handleClick('register')}>
-                Register for COVID Vaccine
+                Register for COVID-19 Vaccine
             </button>
             <button onClick={() => props.handleClick('login')}>
                 View My Appointments

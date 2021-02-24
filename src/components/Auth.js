@@ -17,7 +17,7 @@ class Auth extends React.Component {
             <div>
                 {this.state.status === "buttons" ? <Buttons handleClick={this.handleClick}/> : null}
                 {this.state.status === "register" ? <RegistrationForm /> : null}
-                {this.state.status === "login" ? <LoginForm /> : null}
+                {this.state.status === "login" ? <LoginForm handleLogin={this.props.handleLogin}/> : null}
             </div>
         )
     }
