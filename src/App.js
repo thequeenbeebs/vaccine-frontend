@@ -69,12 +69,53 @@ class App extends React.Component {
     this.setState({ currentPatient: ""})
   }
 
+  handleFormSubmit = (event, inputs) => {
+    event.preventDefault()
+    console.log(inputs)
+    let newAppointment = {
+      patient_id: this.state.currentPatient.id,
+      vaccination_center_id: inputs.location.properties.id,
+      vaccine_id: 5,//hard coded to Moderna - need to fix later
+      appointment_time: `${inputs.date.toLocaleDateString()} ${inputs.time}`
+    }
+
+    let reqPack = {}
+        reqPack.body = JSON.stringify(newAppointment)
+        reqPack.method = "POST"
+        reqPack.headers = {"Content-Type": "application/json"}
+    
+    fetch('http://localhost:3000/appointments', reqPack)
+      .then(resp => resp.json())
+      .then(appointmentData => this.setState({
+        currentPatient: {
+          ...this.state.currentPatient, 
+          appointments: [...this.state.currentPatient.appointments, appointmentData]}
+      }))
+  }
+
+  cancelAppointment = (appointment) => {
+    console.log(appointment)
+    fetch(`http://localhost:3000/appointments/${appointment.id}`, {method: 'DELETE'})
+
+    this.setState({
+      currentPatient: {
+        ...this.state.currentPatient,
+        appointments: this.state.currentPatient.appointments.filter(appt => appt.id !== appointment.id)
+      }
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>HARRIS COUNTY VACCINE HUB</h1>
         {this.state.currentPatient 
-          ? <MainContainer patient={this.state.currentPatient} logOut={this.logOut} locations={this.state.locations}/> 
+          ? <MainContainer patient={this.state.currentPatient} 
+            logOut={this.logOut} 
+            locations={this.state.locations} 
+            handleFormSubmit={this.handleFormSubmit}
+            cancelAppointment={this.cancelAppointment}  
+            /> 
           : <Auth handleLogin={this.handleLogin} handleRegistration={this.handleRegistration}/>}
     </div> 
     )
