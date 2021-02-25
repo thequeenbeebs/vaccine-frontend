@@ -94,7 +94,6 @@ class App extends React.Component {
   }
 
   cancelAppointment = (appointment) => {
-    console.log(appointment)
     fetch(`http://localhost:3000/appointments/${appointment.id}`, {method: 'DELETE'})
 
     this.setState({
