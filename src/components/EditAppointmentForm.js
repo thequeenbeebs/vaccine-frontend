@@ -7,13 +7,12 @@ import 'react-nice-dates/build/style.css'
 
 class EditAppointmentForm extends React.Component{
     state = {
-        // location: "",
-        // date: "",
-        // month: "",
-        // day: "",
-        // year: "",
-        // timeOptions: [],
-        // time: "",
+        date: new Date(this.props.selectedAppointment.appointment_time),
+        month: "",
+        day: "",
+        year: "",
+        timeOptions: [],
+        time: new Date(this.props.selectedAppointment.appointment_time),
         selectedAppointment: this.props.selectedAppointment,
         location: {
             "type": "Feature",
@@ -37,34 +36,34 @@ class EditAppointmentForm extends React.Component{
         }
     }
 
-    // componentDidMount() {
-    //     // let times = 25
-    //     // let updatedTimeOptions = []
-    //     // let time = ""
-    //     // for (let i = 1; i < times; i++) {
-    //     //     time = new Date(2021, 2, 25, i, 0)
-    //     //     updatedTimeOptions = [...updatedTimeOptions, time]
-    //     // }
-    //     // this.setState({timeOptions: updatedTimeOptions})
-    // }
+    componentDidMount() {
+        let times = 25
+        let updatedTimeOptions = []
+        let time = ""
+        for (let i = 1; i < times; i++) {
+            time = new Date(2021, 2, 25, i, 0)
+            updatedTimeOptions = [...updatedTimeOptions, time]
+        }
+        this.setState({timeOptions: updatedTimeOptions})
+    }
 
     chooseLocation = (location) => {
         this.setState({ 
             location: location})
     }
 
-    // chooseDate = (date) => {
-    //     this.setState({
-    //         date: date,
-    //         month: parseInt(format(date, 'M')) - 1,
-    //         day: parseInt(format(date, 'd')),
-    //         year: parseInt(format(date, 'y'))
-    //     })
-    // }
+    chooseDate = (date) => {
+        this.setState({
+            date: date,
+            month: parseInt(format(date, 'M')) - 1,
+            day: parseInt(format(date, 'd')),
+            year: parseInt(format(date, 'y'))
+        })
+    }
 
-    // chooseTime = (time) => {
-    //     this.setState({time: new Date(time)})
-    // }
+    chooseTime = (time) => {
+        this.setState({time: new Date(time)})
+    }
 
     render() {
         return(
@@ -74,10 +73,10 @@ class EditAppointmentForm extends React.Component{
                 <div className="date-container">
                     <h3>Choose a Date:</h3>
                     <p>Selected Location: {this.state.location.properties.name}</p>
-                    {/* <p>Selected date: {this.state.date ? format(this.state.date, 'MMMM dd, yyyy', { locale: enGB }) : 'none'}</p>
-                    <p>Selected time: {this.state.time ? format(this.state.time, 'h:mmaaa') : 'none'}</p>
+                    <p>Selected date: {format(this.state.date, 'MMMM dd, yyyy', { locale: enGB })}</p>
+                    <p>Selected time: {format(this.state.time, 'h:mmaaa')}</p>
                     <form onSubmit={e => {
-                        this.props.handleFormSubmit(e, this.state)
+                        this.props.handleEditFormSubmit(e, this.state)
                         this.props.openPortal()
                         }}>
                         <select className='input' 
@@ -89,7 +88,7 @@ class EditAppointmentForm extends React.Component{
                             style={{ marginLeft: 16, width: 80 }}
                             type='submit'></input>
                     </form>
-                    <DatePickerCalendar date={this.state.date} onDateChange={this.chooseDate} locale={enGB} /> */}
+                    <DatePickerCalendar date={this.state.date} onDateChange={this.chooseDate} locale={enGB} />
                 </div> 
             </div>
         )

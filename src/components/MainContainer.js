@@ -30,7 +30,8 @@ class MainContainer extends React.Component{
     openPortal = () => {
         this.setState({
             formOpen: false,
-            portalOpen: true
+            portalOpen: true,
+            editFormOpen: false
         })
     }
 
@@ -52,7 +53,7 @@ class MainContainer extends React.Component{
                 {(patient.appointments.length === 0) && this.state.portalOpen ? <button onClick={this.openForm}>Schedule COVID-19 Vaccination</button> : null }
                 {this.state.formOpen ? <AppointmentForm locations={this.props.locations} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.openPortal}/> : null}
                 {this.state.modalOpen ? <CancellationModal toggleModal={this.toggleModal} cancelAppointment={this.props.cancelAppointment} appointment={this.state.selectedAppointment}/> : null}
-                {this.state.editFormOpen ? <EditAppointmentForm locations={this.props.locations} selectedAppointment={this.state.selectedAppointment}/> : null}
+                {this.state.editFormOpen ? <EditAppointmentForm locations={this.props.locations} selectedAppointment={this.state.selectedAppointment} handleEditFormSubmit={this.props.handleEditFormSubmit} openPortal={this.openPortal}/> : null}
             </div>
         )
     }

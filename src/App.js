@@ -104,6 +104,30 @@ class App extends React.Component {
     })
   }
 
+  handleEditFormSubmit = (e, data) => {
+    e.preventDefault()
+    let editedAppt = {
+      patient_id: this.state.currentPatient.id,
+      vaccination_center_id: data.location.properties.id,
+      vaccine_id: 5, //this one is hard coded too
+      appointment_time: data.time
+    }
+
+    let reqPack = {}
+        reqPack.body = JSON.stringify(editedAppt)
+        reqPack.method = "PATCH"
+        reqPack.headers = {"Content-Type": "application/json"}
+
+    fetch(`http://localhost:3000/appointments/${data.selectedAppointment.id}`, reqPack)
+      .then(resp => resp.json())
+      .then(appointmentData => this.setState({
+        currentPatient: {
+          ...this.state.currentPatient,
+          appointments: this.state.currentPatient.appointments.map(appt => appt.id === appointmentData.id ? appointmentData : appt)
+        }
+      }))
+  }
+
   render() {
     return (
       <div>
@@ -113,7 +137,8 @@ class App extends React.Component {
             logOut={this.logOut} 
             locations={this.state.locations} 
             handleFormSubmit={this.handleFormSubmit}
-            cancelAppointment={this.cancelAppointment}  
+            cancelAppointment={this.cancelAppointment} 
+            handleEditFormSubmit={this.handleEditFormSubmit} 
             /> 
           : <Auth handleLogin={this.handleLogin} handleRegistration={this.handleRegistration}/>}
     </div> 

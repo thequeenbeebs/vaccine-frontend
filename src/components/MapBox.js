@@ -26,25 +26,6 @@ class MapBox extends React.Component {
             this.addMarkers();
         })
 
-        // map.on('click', (e) => {
-        //   var features = map.queryRenderedFeatures(e.point, {
-        //     layers: ['locations']
-        //   })
-
-        //   if (features.length) {
-        //     var clickedPoint = features[0]
-        //     this.flyToStore(clickedPoint)
-        //     this.createPopUp(clickedPoint)
-        //     var activeItem = document.getElementsByClassName('active');
-        //     if (activeItem[0]) {
-        //       activeItem[0].classList.remove('active');
-        //     }
-        //     var listing = document.getElementById('listing-' + clickedPoint.properties.id);
-        //     listing.classList.add('active');
-          
-        //   }
-        // })
-
         this.setState({
           map: map
         })
