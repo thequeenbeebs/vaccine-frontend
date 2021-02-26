@@ -56,7 +56,7 @@ class App extends React.Component {
     event.preventDefault()
     
     let reqPack = {}
-        reqPack.body = JSON.stringify(newPatient)
+        reqPack.body = JSON.stringify({...newPatient, appointments: []})
         reqPack.method = "POST"
         reqPack.headers = {"Content-Type": "application/json"}
     
@@ -76,9 +76,8 @@ class App extends React.Component {
       patient_id: this.state.currentPatient.id,
       vaccination_center_id: inputs.location.properties.id,
       vaccine_id: 5,//hard coded to Moderna - need to fix later
-      appointment_time: `${inputs.date.toLocaleDateString()} ${inputs.time}`
+      appointment_time: inputs.time
     }
-    debugger 
 
     let reqPack = {}
         reqPack.body = JSON.stringify(newAppointment)

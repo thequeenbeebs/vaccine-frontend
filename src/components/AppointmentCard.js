@@ -1,13 +1,17 @@
 import React from 'react';
+import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz'
 
 const AppointmentCard = ({ appointment, toggleModal, setSelectedAppointment }) => {
     const center = appointment.vaccination_center
     // const date = appointment.appointment_time.toLocaleDateString()
     // const time = appointment.appointment_time.toLocaleTimeString()
+    const dateTime = utcToZonedTime(new Date(appointment.appointment_time), 'America/Chicago')
     
+    //make sure appointment time converts to central time 
     return (
         <div>
-            <h3>{appointment.appointment_time}</h3>
+            <h3>{dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}</h3> 
             <h4>{center.name}</h4>
             <p>{center.address}</p>
             <p>{center.city} {center.state} {center.zip_code}</p>

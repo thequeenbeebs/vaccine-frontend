@@ -74,5 +74,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 Advanced Tech Used:
 
 -MapBox API
--date-fns date utility library
+-date-fns date utility library, date fns-tz
 -Date Picker: React Nice Dates
