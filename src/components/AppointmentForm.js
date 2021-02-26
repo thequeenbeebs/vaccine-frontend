@@ -41,7 +41,7 @@ class AppointmentForm extends React.Component{
     }
 
     chooseTime = (time) => {
-        this.setState({time: time})
+        this.setState({time: new Date(time)})
     }
 
     render() {
@@ -49,11 +49,11 @@ class AppointmentForm extends React.Component{
             <div>
                 <h3>Choose a Location:</h3>
                 <MapBox locations={this.props.locations} chooseLocation={this.chooseLocation}/>
-                <div id="date-container">
+                <div className="date-container">
                     <h3>Choose a Date:</h3>
-                    <p>
-                        Selected date: {this.state.date ? format(this.state.date, 'dd MMM yyyy', { locale: enGB }) : 'none'}
-                    </p>
+                    <p>Selected Location: {this.state.location ? this.state.location.properties.name : 'none'}</p>
+                    <p>Selected date: {this.state.date ? format(this.state.date, 'MMMM dd, yyyy', { locale: enGB }) : 'none'}</p>
+                    <p>Selected time: {this.state.time ? format(this.state.time, 'h:mmaaa') : 'none'}</p>
                     <form onSubmit={e => {
                         this.props.handleFormSubmit(e, this.state)
                         this.props.openPortal()

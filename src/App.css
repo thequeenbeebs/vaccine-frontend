@@ -29,7 +29,7 @@ a:hover {
   color: #101010;
 }
 
-#map-container {
+.map-container {
   position: absolute;
   top: 100;
   left:0;
@@ -37,7 +37,7 @@ a:hover {
   height: 500px;
 }
 
-#date-container {
+.date-container {
   position: relative;
   width: 50%;
   float: right;

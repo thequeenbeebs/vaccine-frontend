@@ -48,6 +48,10 @@ class MapBox extends React.Component {
         this.setState({
           map: map
         })
+
+        // if (this.props.selectedLocation) {
+        //   this.flyToStore(this.props.selectedLocation)
+        // }
     }
 
     flyToStore = currentFeature => {
@@ -101,7 +105,7 @@ class MapBox extends React.Component {
 
     render() {
         return (
-            <div id="map-container">
+            <div className="map-container">
                 <div className='sidebar'>
                     <div className='heading'>
                         <h1>Vaccination Centers</h1>
