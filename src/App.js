@@ -78,6 +78,7 @@ class App extends React.Component {
       vaccine_id: 5,//hard coded to Moderna - need to fix later
       appointment_time: `${inputs.date.toLocaleDateString()} ${inputs.time}`
     }
+    debugger 
 
     let reqPack = {}
         reqPack.body = JSON.stringify(newAppointment)

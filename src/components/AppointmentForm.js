@@ -9,8 +9,11 @@ class AppointmentForm extends React.Component{
     state = {
         location: "",
         date: "",
+        month: "",
+        day: "",
+        year: "",
         timeOptions: [],
-        time: ""
+        time: "",
     }
 
     componentDidMount() {
@@ -18,12 +21,8 @@ class AppointmentForm extends React.Component{
         let updatedTimeOptions = []
         let time = ""
         for (let i = 1; i < times; i++) {
-            if (i < 10) {
-                time = `0${i}:00:00`
-            } else {
-                time = `${i}:00:00`
-            }
-            updatedTimeOptions.push(time)
+            time = new Date(2021, 2, 25, i, 0)
+            updatedTimeOptions = [...updatedTimeOptions, time]
         }
         this.setState({timeOptions: updatedTimeOptions})
     }
@@ -33,7 +32,12 @@ class AppointmentForm extends React.Component{
     }
 
     chooseDate = (date) => {
-        this.setState({date: date})
+        this.setState({
+            date: date,
+            month: parseInt(format(date, 'M')) - 1,
+            day: parseInt(format(date, 'd')),
+            year: parseInt(format(date, 'y'))
+        })
     }
 
     chooseTime = (time) => {
@@ -57,7 +61,7 @@ class AppointmentForm extends React.Component{
                         <select className='input' 
                             style={{ marginLeft: 16, width: 80 }}
                             onChange={(e) => this.chooseTime(e.target.value)}>
-                            {this.state.timeOptions.map(time => <option value={time}>{time}</option>)}
+                            {this.state.timeOptions.map((time, index) => <option value={new Date(this.state.year, this.state.month, this.state.day, index)}>{(new Date(this.state.year, this.state.month, this.state.day, index)).toString()}</option>)}
                         </select>
                         <input className='input' 
                             style={{ marginLeft: 16, width: 80 }}

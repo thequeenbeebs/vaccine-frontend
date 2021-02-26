@@ -2,6 +2,8 @@ import React from 'react';
 
 const AppointmentCard = ({ appointment, toggleModal, setSelectedAppointment }) => {
     const center = appointment.vaccination_center
+    // const date = appointment.appointment_time.toLocaleDateString()
+    // const time = appointment.appointment_time.toLocaleTimeString()
     
     return (
         <div>
