@@ -79,6 +79,13 @@ class LocationDetails extends React.Component {
             disabled: date => daysClosed.includes(getDay(date))
         }
 
+        let arrayOfTimes = []
+        let i = location.properties.openingHour
+        while (i < location.properties.closingHour) {
+            arrayOfTimes.push(i)
+            i++
+        }
+
         return(
             <div className="map-container">
                 <div className='sidebar'>
@@ -107,7 +114,7 @@ class LocationDetails extends React.Component {
                             <div>Available Appointment Times:</div>
                             <select className='input' 
                                 onChange={(e) => this.chooseTime(e.target.value)}>
-                                {this.state.timeOptions.map((time, index) => <option value={new Date(this.state.year, this.state.month, this.state.day, index)}>{format(new Date(this.state.year, this.state.month, this.state.day, index), 'h:mmaaa')}</option>)}
+                                {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
                             </select> <br/>
                             <input className='input' 
                                 type='submit'></input>

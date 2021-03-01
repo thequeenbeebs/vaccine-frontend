@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
-import { format } from 'date-fns';
+import { format, getDay } from 'date-fns';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcXVlZW5iZWVicyIsImEiOiJja2xpaWI2am8wMXdxMnZsanpncjZza2dqIn0.Y_gIhyTKN5URI1TOxbKfiQ';
 
@@ -96,6 +96,18 @@ class EditAppointmentForm extends React.Component {
 
     render() {
         let location = this.state.location
+        let daysClosed = location.properties.daysClosed.map(day => parseInt(day))
+        let modifiers = { 
+            disabled: date => daysClosed.includes(getDay(date))
+        }
+
+        let arrayOfTimes = []
+        let i = location.properties.openingHour
+        while (i < location.properties.closingHour) {
+            arrayOfTimes.push(i)
+            i++
+        }
+
         return(
             <div className="map-container">
                 <div className='sidebar'>
@@ -112,7 +124,7 @@ class EditAppointmentForm extends React.Component {
                             this.props.openPortal()
                             }}>
                             <div>Available Appointment Dates:</div>
-                            <DatePicker date={this.state.date} onDateChange={this.chooseDate} locale={enGB} format='MMM dd yyyy'>
+                            <DatePicker date={this.state.date} onDateChange={this.chooseDate} locale={enGB} format='MMM dd yyyy' modifiers={modifiers}>
                                 {({ inputProps, focused }) => (
                                     <input
                                         className={'input' + (focused ? ' -focused' : '')}
@@ -124,7 +136,7 @@ class EditAppointmentForm extends React.Component {
                             <div>Available Appointment Times:</div>
                             <select className='input' 
                                 onChange={(e) => this.chooseTime(e.target.value)}>
-                                {this.state.timeOptions.map((time, index) => <option value={new Date(this.state.year, this.state.month, this.state.day, index)}>{format(new Date(this.state.year, this.state.month, this.state.day, index), 'h:mmaaa')}</option>)}
+                                {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
                             </select> <br/>
                             <input className='input' 
                                 type='submit'></input>
