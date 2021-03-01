@@ -47,9 +47,11 @@ class MainContainer extends React.Component{
         let patient = this.props.patient
         return(
             <div>
-                <h2>Welcome, {patient.first_name}</h2>
-                <button onClick={this.props.logOut}>Log Out</button><br/>
-                {(patient.appointments.length > 0 ) && this.state.portalOpen ? patient.appointments.map(appointment => <AppointmentCard appointment={appointment} toggleModal={this.toggleModal} setSelectedAppointment={this.setSelectedAppointment} openEditForm={this.openEditForm}/>) : null}
+                <div className="welcome-header">
+                    <h2>Welcome, {patient.first_name}</h2>
+                    <button onClick={this.props.logOut}>Log Out</button><br/>
+                </div>
+                {(patient.appointments.length > 0 ) && this.state.portalOpen ? patient.appointments.map(appointment => <AppointmentCard appointment={appointment} key={appointment.id} toggleModal={this.toggleModal} setSelectedAppointment={this.setSelectedAppointment} openEditForm={this.openEditForm}/>) : null}
                 {(patient.appointments.length === 0) && this.state.portalOpen ? <button onClick={this.openForm}>Schedule COVID-19 Vaccination</button> : null }
                 {this.state.formOpen ? <AppointmentForm locations={this.props.locations} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.openPortal}/> : null}
                 {this.state.modalOpen ? <CancellationModal toggleModal={this.toggleModal} cancelAppointment={this.props.cancelAppointment} appointment={this.state.selectedAppointment}/> : null}

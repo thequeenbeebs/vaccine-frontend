@@ -1,6 +1,8 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import Location from './Location';
+// import turf from 'turf-jsts'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcXVlZW5iZWVicyIsImEiOiJja2xpaWI2am8wMXdxMnZsanpncjZza2dqIn0.Y_gIhyTKN5URI1TOxbKfiQ';
 
@@ -24,15 +26,20 @@ class MapBox extends React.Component {
               data: this.props.locations
             })
             this.addMarkers();
+
+            var geocoder = new MapboxGeocoder({
+              accessToken: mapboxgl.accessToken, 
+              mapboxgl: mapboxgl, 
+              marker: true
+            });
+            
+            map.addControl(geocoder, 'top-left');
+    
         })
 
         this.setState({
           map: map
         })
-
-        // if (this.props.selectedLocation) {
-        //   this.flyToStore(this.props.selectedLocation)
-        // }
     }
 
     flyToStore = currentFeature => {
@@ -87,6 +94,7 @@ class MapBox extends React.Component {
     render() {
         return (
             <div className="map-container">
+                <h3>BEGIN BY SELECTING A LOCATION:</h3>
                 <div className='sidebar'>
                     <div className='heading'>
                         <h1>Vaccination Centers</h1>
@@ -97,6 +105,7 @@ class MapBox extends React.Component {
                 </div>
                 <div id="map" className="map"></div>
             </div>
+            
         )
     }
 }

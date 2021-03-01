@@ -82,7 +82,7 @@ class EditAppointmentForm extends React.Component{
                         <select className='input' 
                             style={{ marginLeft: 16, width: 80 }}
                             onChange={(e) => this.chooseTime(e.target.value)}>
-                            {this.state.timeOptions.map((time, index) => <option value={new Date(this.state.year, this.state.month, this.state.day, index)}>{(new Date(this.state.year, this.state.month, this.state.day, index)).toString()}</option>)}
+                            {this.state.timeOptions.map((time, index) => <option value={new Date(this.state.year, this.state.month, this.state.day, index)}>{format(new Date(this.state.year, this.state.month, this.state.day, index), 'h:mmaaa')}</option>)}
                         </select>
                         <input className='input' 
                             style={{ marginLeft: 16, width: 80 }}

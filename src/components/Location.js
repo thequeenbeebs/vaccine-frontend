@@ -13,7 +13,7 @@ const Location = ({ store, handleClick, chooseLocation }) => {
             <div>{store.properties.phoneFormatted}
             {store.properties.distance ? (Math.round(store.properties.distance * 100) / 100) + " miles away" : null}
             </div>
-            <button onClick={() => chooseLocation(store)}>Select This Location</button>
+            <button onClick={() => chooseLocation(store)}>Arrow Icon</button>
         </div>
     )
 }

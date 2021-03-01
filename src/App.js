@@ -71,7 +71,7 @@ class App extends React.Component {
 
   handleFormSubmit = (event, inputs) => {
     event.preventDefault()
-    console.log(inputs)
+    
     let newAppointment = {
       patient_id: this.state.currentPatient.id,
       vaccination_center_id: inputs.location.properties.id,
