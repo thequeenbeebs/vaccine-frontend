@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
-import { format } from 'date-fns';
+import { format, getDay } from 'date-fns';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcXVlZW5iZWVicyIsImEiOiJja2xpaWI2am8wMXdxMnZsanpncjZza2dqIn0.Y_gIhyTKN5URI1TOxbKfiQ';
 
@@ -74,6 +74,11 @@ class LocationDetails extends React.Component {
 
     render() {
         let location = this.props.location
+        let daysClosed = location.properties.daysClosed.map(day => parseInt(day))
+        let modifiers = { 
+            disabled: date => daysClosed.includes(getDay(date))
+        }
+
         return(
             <div className="map-container">
                 <div className='sidebar'>
@@ -90,7 +95,7 @@ class LocationDetails extends React.Component {
                             this.props.openPortal()
                             }}>
                             <div>Available Appointment Dates:</div>
-                            <DatePicker date={this.state.date} onDateChange={this.chooseDate} locale={enGB} format='MMM dd yyyy'>
+                            <DatePicker date={this.state.date} onDateChange={this.chooseDate} locale={enGB} format='MMM dd yyyy' modifiers={modifiers}>
                                 {({ inputProps, focused }) => (
                                     <input
                                         className={'input' + (focused ? ' -focused' : '')}

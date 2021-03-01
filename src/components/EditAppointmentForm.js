@@ -30,7 +30,7 @@ class EditAppointmentForm extends React.Component {
                 "state": this.props.selectedAppointment.vaccination_center.state,
                 "postalCode": this.props.selectedAppointment.vaccination_center.zip_code,
                 "id": this.props.selectedAppointment.vaccination_center.id,
-                "daysOpen": this.props.selectedAppointment.vaccination_center.days_open,
+                "daysClosed": this.props.selectedAppointment.vaccination_center.days_closed,
                 "openingHour": this.props.selectedAppointment.vaccination_center.opening_hour,
                 "closingHour": this.props.selectedAppointment.vaccination_center.closing_hour,
                 "appointmentsPerHour": this.props.selectedAppointment.vaccination_center.appointments_per_hour

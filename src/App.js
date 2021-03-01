@@ -35,7 +35,7 @@ class App extends React.Component {
             "state": location.state,
             "postalCode": location.zip_code,
             "id": location.id,
-            "daysOpen": location.days_open,
+            "daysClosed": location.days_closed,
             "openingHour": location.opening_hour,
             "closingHour": location.closing_hour,
             "appointmentsPerHour": location.appointments_per_hour
