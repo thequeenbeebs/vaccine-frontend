@@ -1,8 +1,6 @@
 import React from 'react';
 import MapBox from './MapBox'
 import LocationDetails from './LocationDetails'
-import { format } from 'date-fns';
-
 
 class AppointmentForm extends React.Component{
     state = {

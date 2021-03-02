@@ -10,6 +10,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    if(localStorage.getItem("token")) {
+      fetch('http://localhost:3000/decode_token', {
+        headers: {
+          "Authenticate": localStorage.token
+        }
+      })
+        .then(resp => resp.json())
+        .then(patientData => this.setState({currentPatient: patientData}))
+    }
+
     fetch('http://localhost:3000/vaccination_centers')
     .then(resp => resp.json())
     .then(locationData => {
@@ -57,10 +67,18 @@ class App extends React.Component {
 
     fetch('http://localhost:3000/login', reqPack)
         .then(resp => resp.json())
-        .then(patientData => {
-          patientData.error_message ? alert(patientData.error_message) : this.setState({currentPatient: patientData})
+        .then(data => {
+          let patientData = JSON.parse(data.patient_data)
+          if (patientData.error_message) {
+            alert(patientData.error_message) 
+          } else {
+            localStorage.setItem("token", data.token)
+            this.setState({currentPatient: patientData})
+          }
         })
   }
+
+  
 
   handleRegistration = (event, newPatient) => {
     event.preventDefault()
@@ -72,12 +90,20 @@ class App extends React.Component {
     
     fetch('http://localhost:3000/patients', reqPack)
       .then(resp => resp.json())
-      .then(newPatient => { 
-        newPatient.error_message ? alert(newPatient.error_message) : this.setState({ currentPatient: {...newPatient, appointments: []}})})
+      .then(data => { 
+        let patientData = JSON.parse(data.patient_data)
+        if (patientData.error_message) {
+          alert(patientData.error_message) 
+        } else {
+          localStorage.setItem("token", data.token)
+          this.setState({currentPatient: patientData})
+        }
+        })
   }
 
   logOut = () => {
-    this.setState({ currentPatient: ""})
+    localStorage.removeItem("token")
+    this.setState({ currentPatient: null})
   }
 
   handleFormSubmit = (event, inputs) => {
