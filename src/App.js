@@ -5,16 +5,11 @@ import MainContainer from "./components/MainContainer"
 
 class App extends React.Component {
   state = {
-    currentPatient: "",
-    patients: [],
+    currentPatient: null,
     locations: []
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/patients')
-    .then(resp => resp.json())
-    .then(patientData => this.setState({patients: patientData}))
-
     fetch('http://localhost:3000/vaccination_centers')
     .then(resp => resp.json())
     .then(locationData => {
@@ -46,23 +41,39 @@ class App extends React.Component {
     })
   }
 
-  handleLogin = (event, email) => {
+  handleLogin = (event, state) => {
     event.preventDefault()
-    let login = this.state.patients.find(patient => patient.email === email)
-    this.setState({currentPatient: login})
+
+    let reqPack = {}
+        reqPack.method = "POST"
+        reqPack.headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+        reqPack.body = JSON.stringify({
+          email: state.email,
+          password: state.password
+        })
+
+    fetch('http://localhost:3000/login', reqPack)
+        .then(resp => resp.json())
+        .then(patientData => {
+          patientData.error_message ? alert(patientData.error_message) : this.setState({currentPatient: patientData})
+        })
   }
 
   handleRegistration = (event, newPatient) => {
     event.preventDefault()
     
     let reqPack = {}
-        reqPack.body = JSON.stringify({...newPatient, appointments: []})
+        reqPack.body = JSON.stringify({patient: newPatient})
         reqPack.method = "POST"
         reqPack.headers = {"Content-Type": "application/json"}
     
     fetch('http://localhost:3000/patients', reqPack)
       .then(resp => resp.json())
-      .then(newPatient => this.setState({ currentPatient: newPatient}))
+      .then(newPatient => { 
+        newPatient.error_message ? alert(newPatient.error_message) : this.setState({ currentPatient: {...newPatient, appointments: []}})})
   }
 
   logOut = () => {

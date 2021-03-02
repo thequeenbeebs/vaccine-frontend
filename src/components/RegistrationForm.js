@@ -6,7 +6,8 @@ class RegistrationForm extends React.Component {
         last_name: "",
         email: "",
         phone_number: "",
-        appointments: []
+        password: "",
+        password_confirmation: ""
     }
 
     handleChange = (event) => {
@@ -24,11 +25,17 @@ class RegistrationForm extends React.Component {
                     <label>Last Name:</label><br/>
                     <input type="text" name="last_name"
                         onChange={(e) => this.handleChange(e)}></input><br/>
+                    <label>Phone Number:</label><br/>
+                    <input type="text" name="phone_number"
+                        onChange={(e) => this.handleChange(e)}></input><br/>
                     <label>E-mail Address:</label><br/>
                     <input type="text" name="email"
                         onChange={(e) => this.handleChange(e)}></input><br/>
-                    <label>Phone Number:</label><br/>
-                    <input type="text" name="phone_number"
+                    <label>Password:</label><br/>
+                    <input type="password" name="password"
+                        onChange={(e) => this.handleChange(e)}></input><br/>
+                    <label>Confirm Password:</label><br/>
+                    <input type="password" name="password_confirmation"
                         onChange={(e) => this.handleChange(e)}></input><br/>
                     <input type="submit"></input>
                 </form>
