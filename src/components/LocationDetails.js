@@ -15,7 +15,7 @@ class LocationDetails extends React.Component {
         year: "",
         timeOptions: [],
         time: "",
-        location: ""
+        location: "",
     }
 
     componentDidMount() {
@@ -111,13 +111,14 @@ class LocationDetails extends React.Component {
                                     />
                                 )}
                             </DatePicker>
-                            <div>Available Appointment Times:</div>
+                            {this.state.date ? <div><div>Available Appointment Times:</div>
                             <select className='input' 
                                 onChange={(e) => this.chooseTime(e.target.value)}>
+                                <option disabled selected></option>
                                 {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
-                            </select> <br/>
-                            <input className='input' 
-                                type='submit'></input>
+                            </select> <br/></div> : null}
+                            {this.state.time ? <input className='input' 
+                                type='submit'></input> : null}
                         </form>
                     </div>
                 </div>
