@@ -8,7 +8,8 @@ import Container from '@material-ui/core/Container'
 class App extends React.Component {
   state = {
     currentPatient: null,
-    locations: []
+    locations: [],
+    vaccines: []
   }
 
   componentDidMount() {
@@ -21,6 +22,10 @@ class App extends React.Component {
         .then(resp => resp.json())
         .then(patientData => this.setState({currentPatient: patientData}))
     }
+
+    fetch('http://localhost:3000/vaccines')
+      .then(resp => resp.json())
+      .then(vaxData => this.setState({vaccines: vaxData}))
 
     fetch('http://localhost:3000/vaccination_centers')
     .then(resp => resp.json())
@@ -111,11 +116,12 @@ class App extends React.Component {
     event.preventDefault()
     
     let newAppointment = {
-      patient_id: this.state.currentPatient.id,
-      vaccination_center_id: inputs.location.properties.id,
-      vaccine_id: 5,//hard coded to Moderna - need to fix later
-      appointment_time: inputs.time
-    }
+      appointment: {
+        patient_id: this.state.currentPatient.id,
+        vaccination_center_id: inputs.location.properties.id,
+        vaccine_id: 11,//hard coded to Moderna - need to fix later
+        appointment_time: inputs.time
+    }}
 
     let reqPack = {}
         reqPack.body = JSON.stringify(newAppointment)
@@ -145,11 +151,12 @@ class App extends React.Component {
   handleEditFormSubmit = (e, data) => {
     e.preventDefault()
     let editedAppt = {
-      patient_id: this.state.currentPatient.id,
-      vaccination_center_id: data.location.properties.id,
-      vaccine_id: 5, //this one is hard coded too
-      appointment_time: data.time
-    }
+      appointment: {
+        patient_id: this.state.currentPatient.id,
+        vaccination_center_id: data.location.properties.id,
+        vaccine_id: 11, //this one is hard coded too
+        appointment_time: data.time
+    }}
 
     let reqPack = {}
         reqPack.body = JSON.stringify(editedAppt)
@@ -176,7 +183,8 @@ class App extends React.Component {
           {this.state.currentPatient 
             ? <MainContainer patient={this.state.currentPatient} 
               logOut={this.logOut} 
-              locations={this.state.locations} 
+              locations={this.state.locations}
+              vaccines={this.state.vaccines} 
               handleFormSubmit={this.handleFormSubmit}
               cancelAppointment={this.cancelAppointment} 
               handleEditFormSubmit={this.handleEditFormSubmit} 

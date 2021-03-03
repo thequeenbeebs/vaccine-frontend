@@ -1,6 +1,8 @@
 import React from 'react';
 import MapBox from './MapBox'
 import LocationDetails from './LocationDetails'
+import Button from '@material-ui/core/Button';
+import SecondAppointmentForm from './SecondAppointmentForm'
 
 class AppointmentForm extends React.Component{
     state = {
@@ -11,7 +13,9 @@ class AppointmentForm extends React.Component{
         year: "",
         timeOptions: [],
         time: "",
-        selectLocation: true
+        selectLocation: true,
+        firstForm: false,
+        secondForm: false
     }
 
     componentDidMount() {
@@ -35,7 +39,12 @@ class AppointmentForm extends React.Component{
     render() {
         return(
             <div>
-                {this.state.selectLocation ? <MapBox locations={this.props.locations} chooseLocation={this.chooseLocation}/> : <LocationDetails location={this.state.location} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.props.openPortal}/>}
+                Which dose are you trying to schedule?
+                <Button onClick={() => this.setState({firstForm: true})}>First Dose</Button>
+                <Button onClick={() => this.setState({secondForm: true})}>Second Dose</Button>
+                {this.state.firstForm && this.state.selectLocation ? <MapBox locations={this.props.locations} chooseLocation={this.chooseLocation}/> : null}
+                {this.state.firstForm && !this.state.selectLocation ? <LocationDetails location={this.state.location} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.props.openPortal}/> : null}
+                {this.state.secondForm ? <SecondAppointmentForm locations={this.props.locations} vaccines={this.props.vaccines} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.props.openPortal}/> : null}
             </div>
         )
     }

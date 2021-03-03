@@ -114,9 +114,9 @@ class LocationDetails extends React.Component {
                             {this.state.date 
                                 ? <div>
                                     <div>Available Appointment Times:</div>
-                                    <select className='input' 
+                                    <select className='input' defaultValue='default'
                                         onChange={(e) => this.chooseTime(e.target.value)}>
-                                        <option disabled defaultValue></option>
+                                        <option disabled value='default'></option>
                                         {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
                                     </select> <br/>
                                     </div> : null}
