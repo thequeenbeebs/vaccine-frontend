@@ -70,14 +70,15 @@ class App extends React.Component {
     fetch('http://localhost:3000/login', reqPack)
         .then(resp => resp.json())
         .then(data => {
-          let patientData = JSON.parse(data.patient_data)
-          if (patientData.error_message) {
-            alert(patientData.error_message) 
+          if (data.error_message) {
+            alert(data.error_message) 
           } else {
+            let patientData = JSON.parse(data.patient_data)
             localStorage.setItem("token", data.token)
             this.setState({currentPatient: patientData})
           }
         })
+        
   }
 
   
@@ -91,10 +92,10 @@ class App extends React.Component {
     fetch('http://localhost:3000/patients', reqPack)
       .then(resp => resp.json())
       .then(data => { 
-        let patientData = JSON.parse(data.patient_data)
-        if (patientData.error_message) {
-          alert(patientData.error_message) 
+        if (data.error_message) {
+          alert(data.error_message) 
         } else {
+          let patientData = JSON.parse(data.patient_data)
           localStorage.setItem("token", data.token)
           this.setState({currentPatient: patientData})
         }
