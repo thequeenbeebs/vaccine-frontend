@@ -111,12 +111,15 @@ class LocationDetails extends React.Component {
                                     />
                                 )}
                             </DatePicker>
-                            {this.state.date ? <div><div>Available Appointment Times:</div>
-                            <select className='input' 
-                                onChange={(e) => this.chooseTime(e.target.value)}>
-                                <option disabled selected></option>
-                                {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
-                            </select> <br/></div> : null}
+                            {this.state.date 
+                                ? <div>
+                                    <div>Available Appointment Times:</div>
+                                    <select className='input' 
+                                        onChange={(e) => this.chooseTime(e.target.value)}>
+                                        <option disabled defaultValue></option>
+                                        {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
+                                    </select> <br/>
+                                    </div> : null}
                             {this.state.time ? <input className='input' 
                                 type='submit'></input> : null}
                         </form>
