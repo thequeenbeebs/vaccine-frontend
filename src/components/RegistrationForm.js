@@ -78,9 +78,7 @@ const validateForm = (errors) => {
                 password_confirmation: this.state.password_confirmation
             }
             this.props.handleRegistration(newPatient)
-        } else {
-            console.error('Invalid Form')
-        }
+        } 
     }
 
     render() {

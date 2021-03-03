@@ -57,8 +57,6 @@ class SecondAppointmentForm extends React.Component {
             i++
             }
         }
-
-        
         
         return (
             <div>

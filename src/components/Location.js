@@ -1,4 +1,6 @@
 import React from 'react';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Button from '@material-ui/core/Button';
 
 const Location = ({ store, handleClick, chooseLocation }) => {
     return (
@@ -13,7 +15,7 @@ const Location = ({ store, handleClick, chooseLocation }) => {
             <div>{store.properties.phoneFormatted}
             {store.properties.distance ? (Math.round(store.properties.distance * 100) / 100) + " miles away" : null}
             </div>
-            <button onClick={() => chooseLocation(store)}>Arrow Icon</button>
+            <Button onClick={() => chooseLocation(store)}><ArrowForwardIcon/></Button>
         </div>
     )
 }

@@ -2,14 +2,16 @@ import './App.css';
 import React from 'react';
 import Auth from './components/Auth'
 import MainContainer from "./components/MainContainer"
-import AppBar from '@material-ui/core/AppBar'
-import Container from '@material-ui/core/Container'
+import { AppBar, Snackbar } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+// import { Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
     currentPatient: null,
     locations: [],
-    vaccines: []
+    vaccines: [],
+    errors: ''
   }
 
   componentDidMount() {
@@ -58,6 +60,10 @@ class App extends React.Component {
     })
   }
 
+  handleClose = () => {
+    this.setState({errors: null})
+  }
+
   handleLogin = (event, state) => {
     event.preventDefault()
 
@@ -76,7 +82,7 @@ class App extends React.Component {
         .then(resp => resp.json())
         .then(data => {
           if (data.error_message) {
-            alert(data.error_message) 
+            this.setState({errors: data.error_message})
           } else {
             let patientData = JSON.parse(data.patient_data)
             localStorage.setItem("token", data.token)
@@ -98,7 +104,7 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(data => { 
         if (data.error_message) {
-          alert(data.error_message) 
+          this.setState({errors: data.error_message}) 
         } else {
           let patientData = JSON.parse(data.patient_data)
           localStorage.setItem("token", data.token)
@@ -179,7 +185,10 @@ class App extends React.Component {
         <AppBar color="primary">
           <h1>HARRIS COUNTY VACCINE HUB</h1>
         </AppBar>
-        <Container>
+        {this.state.errors ? <Snackbar open={true} autoHideDuration={6000} onClose={this.handleClose}>
+          <Alert variant="filled" severity="error">{this.state.errors}</Alert>
+        </Snackbar> : null}
+        
           {this.state.currentPatient 
             ? <MainContainer patient={this.state.currentPatient} 
               logOut={this.logOut} 
@@ -190,7 +199,6 @@ class App extends React.Component {
               handleEditFormSubmit={this.handleEditFormSubmit} 
               /> 
             : <Auth handleLogin={this.handleLogin} handleRegistration={this.handleRegistration}/>}
-        </Container>
     </div> 
     )
   }
