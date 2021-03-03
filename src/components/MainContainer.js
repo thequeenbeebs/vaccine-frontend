@@ -46,7 +46,7 @@ class MainContainer extends React.Component{
     render() {
         let patient = this.props.patient
         return(
-            <div>
+            <div className="main-container">
                 <div className="welcome-header">
                     <h2>Welcome, {patient.first_name}</h2>
                     <button onClick={this.props.logOut}>Log Out</button><br/>

@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react';
 import Auth from './components/Auth'
 import MainContainer from "./components/MainContainer"
+import AppBar from '@material-ui/core/AppBar'
+import Container from '@material-ui/core/Container'
 
 class App extends React.Component {
   state = {
@@ -80,9 +82,7 @@ class App extends React.Component {
 
   
 
-  handleRegistration = (event, newPatient) => {
-    event.preventDefault()
-    
+  handleRegistration = (newPatient) => {
     let reqPack = {}
         reqPack.body = JSON.stringify({patient: newPatient})
         reqPack.method = "POST"
@@ -168,16 +168,20 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>HARRIS COUNTY VACCINE HUB</h1>
-        {this.state.currentPatient 
-          ? <MainContainer patient={this.state.currentPatient} 
-            logOut={this.logOut} 
-            locations={this.state.locations} 
-            handleFormSubmit={this.handleFormSubmit}
-            cancelAppointment={this.cancelAppointment} 
-            handleEditFormSubmit={this.handleEditFormSubmit} 
-            /> 
-          : <Auth handleLogin={this.handleLogin} handleRegistration={this.handleRegistration}/>}
+        <AppBar color="primary">
+          <h1>HARRIS COUNTY VACCINE HUB</h1>
+        </AppBar>
+        <Container>
+          {this.state.currentPatient 
+            ? <MainContainer patient={this.state.currentPatient} 
+              logOut={this.logOut} 
+              locations={this.state.locations} 
+              handleFormSubmit={this.handleFormSubmit}
+              cancelAppointment={this.cancelAppointment} 
+              handleEditFormSubmit={this.handleEditFormSubmit} 
+              /> 
+            : <Auth handleLogin={this.handleLogin} handleRegistration={this.handleRegistration}/>}
+        </Container>
     </div> 
     )
   }

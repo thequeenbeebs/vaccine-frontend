@@ -220,3 +220,17 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   justify-content: space-between;
   height: 4.5rem;
 }
+
+.main-container {
+  border: solid 3px black;
+  margin-top: 200px;
+  text-align: center;
+  padding: 10px;
+  width: 75%;
+}
+
+.error {
+  color:red;
+  font-size: 0.625em;
+  display: relative;
+}
