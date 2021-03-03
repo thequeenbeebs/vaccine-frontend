@@ -1,7 +1,7 @@
 import React from 'react';
 import { DatePicker } from 'react-nice-dates'
 import { enGB } from 'date-fns/locale'
-import { format } from 'date-fns';
+import { format, add } from 'date-fns';
 
 class SecondAppointmentForm extends React.Component {
     state = {
@@ -39,7 +39,12 @@ class SecondAppointmentForm extends React.Component {
 
     chooseVaccine = (id) => {
         let vax = this.props.vaccines.find(vaccine => vaccine.id === parseInt(id))
-        this.setState({vaccine: vax})
+        let recommendedDate = add(new Date(this.state.date), {weeks: vax.weeks_between_doses})
+        this.setState({
+            vaccine: vax,
+            secondDate: recommendedDate
+        })
+        
     }
 
     render() {
@@ -52,6 +57,8 @@ class SecondAppointmentForm extends React.Component {
             i++
             }
         }
+
+        
         
         return (
             <div>
