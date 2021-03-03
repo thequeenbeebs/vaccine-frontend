@@ -1,15 +1,21 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { Dialog, DialogActions, DialogTitle, Button } from '@material-ui/core';
 
 const CancellationModal = ({ toggleModal, cancelAppointment, appointment }) => {
     return(
-        <div>
-            <h3>Are you sure you want to cancel this appointment?</h3>
+        <Dialog
+            open={true}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">{"Are you sure you want to cancel this appointment?"}</DialogTitle>
+            <DialogActions>
             <Button onClick={() => {
                 cancelAppointment(appointment)
                 toggleModal()}}>Yes</Button>
             <Button onClick={toggleModal}>No</Button>
-        </div>
+            </DialogActions>
+            
+        </Dialog>
     )
 }
 
