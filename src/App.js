@@ -182,8 +182,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AppBar color="primary">
-          <h1>HARRIS COUNTY VACCINE HUB</h1>
+        <AppBar color="primary" className="header">
+          HARRIS COUNTY VACCINE HUB
         </AppBar>
         {this.state.errors ? <Snackbar open={true} autoHideDuration={6000} onClose={this.handleClose}>
           <Alert variant="filled" severity="error">{this.state.errors}</Alert>
