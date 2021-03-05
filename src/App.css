@@ -80,13 +80,15 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   height: 100%;
   overflow: auto;
   padding-bottom: 60px;
+  margin-left: 15px;
 }
 
 .listings .item {
-  display: block;
+  display: flex;
   border-bottom: 1px solid #eee;
   padding: 10px;
   text-decoration: none;
+  
 }
 
 .listings .item:last-child { border-bottom: none; }
@@ -227,11 +229,27 @@ gets 2/3 of the page. You can adjust this to your personal liking. */
   text-align: center;
   padding: 10px;
   width: 75%;
-  margin: 200px auto;
+  margin-top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
 }
 
 .error {
   color:red;
   font-size: 0.625em;
   display: relative;
+}
+
+.arrow-btn {
+  float: right;
+}
+
+.location-details{
+  width: 100%;
+  margin: 30px;
+}
+
+.submit-btn{
+  margin-top: 15px;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import MapBox from './MapBox'
 import LocationDetails from './LocationDetails'
-import Button from '@material-ui/core/Button';
+import { Dialog, DialogActions, DialogTitle, Button } from '@material-ui/core';
 import SecondAppointmentForm from './SecondAppointmentForm'
 
 class AppointmentForm extends React.Component{
@@ -15,7 +15,8 @@ class AppointmentForm extends React.Component{
         time: "",
         selectLocation: true,
         firstForm: false,
-        secondForm: false
+        secondForm: false,
+        firstQuestion: true,
     }
 
     componentDidMount() {
@@ -32,19 +33,31 @@ class AppointmentForm extends React.Component{
     chooseLocation = (location) => {
         this.setState({ 
             location: location,
-            selectLocation: false
+            selectLocation: !this.state.selectLocation
         })
     }
 
     render() {
         return(
             <div>
-                Which dose are you trying to schedule?
-                <Button onClick={() => this.setState({firstForm: true})}>First Dose</Button>
-                <Button onClick={() => this.setState({secondForm: true})}>Second Dose</Button>
+                
+                    
+                    {this.state.firstQuestion 
+                    ? <Dialog
+                        open={true}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"><DialogTitle id="alert-dialog-title">{"Which dose are you trying to schedule?"}</DialogTitle>
+                        <DialogActions>
+                        <Button onClick={() => this.setState({firstForm: true, firstQuestion:false})}>First Dose</Button>
+                        <Button onClick={() => this.setState({secondForm: true, firstQuestion: false})}>Second Dose</Button>
+                        </DialogActions>
+                    </Dialog>
+                    : null}
+                
                 {this.state.firstForm && this.state.selectLocation ? <MapBox locations={this.props.locations} chooseLocation={this.chooseLocation}/> : null}
-                {this.state.firstForm && !this.state.selectLocation ? <LocationDetails location={this.state.location} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.props.openPortal}/> : null}
+                {this.state.firstForm && !this.state.selectLocation ? <LocationDetails location={this.state.location} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.props.openPortal} chooseLocation={this.chooseLocation}/> : null}
                 {this.state.secondForm ? <SecondAppointmentForm locations={this.props.locations} vaccines={this.props.vaccines} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.props.openPortal}/> : null}
+                
             </div>
         )
     }

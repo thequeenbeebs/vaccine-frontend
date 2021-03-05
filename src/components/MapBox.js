@@ -45,7 +45,7 @@ class MapBox extends React.Component {
     flyToStore = currentFeature => {
       this.state.map.flyTo({
         center: currentFeature.geometry.coordinates,
-        zoom: 15
+        zoom: 11
       })
     }
 
@@ -54,7 +54,9 @@ class MapBox extends React.Component {
       if (popUps[0]) popUps[0].remove();
       var popup = new mapboxgl.Popup({closeOnClick: false})
         .setLngLat(currentFeature.geometry.coordinates)
-        .setHTML('<h3>' + currentFeature.properties.name + '</h3>' + '<h4>' + currentFeature.properties.address + '</h4>')
+        .setHTML(`<h3>${currentFeature.properties.name}</h3><div>${currentFeature.properties.address}
+          ${currentFeature.properties.city} · ${currentFeature.properties.state} · ${currentFeature.properties.postalCode} · ${currentFeature.properties.phoneFormatted}</div>
+          `)
         .addTo(this.state.map);
     }
 
@@ -94,10 +96,9 @@ class MapBox extends React.Component {
     render() {
         return (
             <div className="map-container">
-                <h3>BEGIN BY SELECTING A LOCATION:</h3>
                 <div className='sidebar'>
                     <div className='heading'>
-                        <h1>Vaccination Centers</h1>
+                        <h1>Select A Location:</h1>
                     </div>
                     <div id='listings' className='listings'>
                         {this.props.locations.features ? this.props.locations.features.map(store => <Location store={store} key={store.properties.id} handleClick={this.handleClick} chooseLocation={this.props.chooseLocation}/>) : null}

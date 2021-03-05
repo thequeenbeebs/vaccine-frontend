@@ -126,7 +126,7 @@ class App extends React.Component {
         patient_id: this.state.currentPatient.id,
         vaccination_center_id: inputs.location.properties.id,
         vaccine_id: 11,//hard coded to Moderna - need to fix later
-        appointment_time: inputs.time
+        appointment_time: new Date(inputs.time)
     }}
 
     let reqPack = {}
@@ -188,7 +188,6 @@ class App extends React.Component {
         {this.state.errors ? <Snackbar open={true} autoHideDuration={6000} onClose={this.handleClose}>
           <Alert variant="filled" severity="error">{this.state.errors}</Alert>
         </Snackbar> : null}
-        
           {this.state.currentPatient 
             ? <MainContainer patient={this.state.currentPatient} 
               logOut={this.logOut} 

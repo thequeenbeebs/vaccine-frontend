@@ -1,9 +1,10 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import { enGB } from 'date-fns/locale'
-import { DatePicker } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import { format, getDay } from 'date-fns';
+import { Button, FormControl, MenuItem, Select } from '@material-ui/core';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
+import DateFnsUtils from '@date-io/date-fns'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcXVlZW5iZWVicyIsImEiOiJja2xpaWI2am8wMXdxMnZsanpncjZza2dqIn0.Y_gIhyTKN5URI1TOxbKfiQ';
 
@@ -94,13 +95,14 @@ class EditAppointmentForm extends React.Component {
         this.setState({time: new Date(time)})
     }
 
+    disabledDates = (date) => {
+        let location = this.props.location
+        let daysClosed = location.properties.daysClosed.map(day => parseInt(day))
+        return daysClosed.includes(getDay(date))
+    }
+
     render() {
         let location = this.state.location
-        let daysClosed = location.properties.daysClosed.map(day => parseInt(day))
-        let modifiers = { 
-            disabled: date => daysClosed.includes(getDay(date))
-        }
-
         let arrayOfTimes = []
         let i = location.properties.openingHour
         while (i < location.properties.closingHour) {
@@ -115,32 +117,41 @@ class EditAppointmentForm extends React.Component {
                         <h1>{location.properties.name}</h1>
                     </div>
                     <div id='listings' className='listings'>
+                        <div className="location-details">
                         <div>{location.properties.address}</div>
                         <div>{location.properties.city} · {location.properties.state} · {location.properties.postalCode}</div>
                         <div>{location.properties.phoneFormatted}</div>
+                        
                         <br/>
                         <form onSubmit={e => {
                             this.props.handleEditFormSubmit(e, this.state)
                             this.props.openPortal()
                             }}>
-                            <div>Available Appointment Dates:</div>
-                            <DatePicker date={this.state.date} onDateChange={this.chooseDate} locale={enGB} format='MMM dd yyyy' modifiers={modifiers}>
-                                {({ inputProps, focused }) => (
-                                    <input
-                                        className={'input' + (focused ? ' -focused' : '')}
-                                        { ...inputProps}
-                                        placeholder="mm/dd/yyyy"
-                                    />
-                                )}
-                            </DatePicker>
-                            <div>Available Appointment Times:</div>
-                            <select className='input' 
-                                onChange={(e) => this.chooseTime(e.target.value)}>
-                                {arrayOfTimes.map((time) => <option value={new Date(this.state.year, this.state.month, this.state.day, time)}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</option>)}
-                            </select> <br/>
-                            <input className='input' 
-                                type='submit'></input>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <DatePicker value={this.state.date} 
+                                    onChange={this.chooseDate}
+                                    shouldDisableDate={this.disabledDates}
+                                    emptyLabel="Appointment Dates" />
+                            </MuiPickersUtilsProvider>
+                            <div>
+                            <FormControl>
+                                <Select className='input submit-btn' 
+                                        value={this.state.time}
+                                        label="Appointment Times"
+                                        onChange={(e) => this.chooseTime(e.target.value)}
+                                        displayEmpty
+                                        emptyLabel="Appointment Times"
+                                        >
+                                        <MenuItem value="" disabled>Available Times</MenuItem>
+                                        {arrayOfTimes.map((time) => <MenuItem value={new Date(this.state.year, this.state.month, this.state.day, time).toString()}>{format(new Date(this.state.year, this.state.month, this.state.day, time), 'h:mmaaa')}</MenuItem>)}
+                                </Select> 
+                            </FormControl><br/>
+                            </div>
+                            <div className="submit-btn"><Button className='input' 
+                                type='submit'
+                                variant="outlined">Submit</Button></div>
                         </form>
+                        </div>
                     </div>
                 </div>
                 <div id="map" className="map"></div>

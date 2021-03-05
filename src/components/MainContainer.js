@@ -55,14 +55,14 @@ class MainContainer extends React.Component{
     render() {
         let patient = this.props.patient
         return(
-            <div >
+            <div>
                 <div className="welcome-header main-container">
                     <h2>Welcome, {patient.first_name}</h2>
+                    <Button onClick={this.openPortal}>Profile</Button><br/>
+                    {patient.appointments.length === 0 ? <Button onClick={this.openForm}>Schedule COVID-19 Vaccination </Button> : null}
                     <Button onClick={this.props.logOut}>Log Out</Button><br/>
                 </div>
                 {(patient.appointments.length > 0 ) && this.state.portalOpen ? patient.appointments.map(appointment => <AppointmentCard appointment={appointment} key={appointment.id} toggleModal={this.toggleModal} setSelectedAppointment={this.setSelectedAppointment} openEditForm={this.openEditForm}/>) : null}
-                {(patient.appointments.length === 0) && this.state.portalOpen ? <Button onClick={this.openForm}>Schedule COVID-19 Vaccination </Button> : null }
-                {/* {(patient.appointments.length === 1) && this.state.portalOpen? <Button onClick={this.openSecondForm}>Schedule Second Vaccination Appointment</Button> : null} */}
                 {this.state.formOpen ? <AppointmentForm locations={this.props.locations} handleFormSubmit={this.props.handleFormSubmit} openPortal={this.openPortal} vaccines={this.props.vaccines}/> : null}
                 {this.state.modalOpen ? <CancellationModal toggleModal={this.toggleModal} cancelAppointment={this.props.cancelAppointment} appointment={this.state.selectedAppointment}/> : null}
                 {this.state.editFormOpen ? <EditAppointmentForm locations={this.props.locations} selectedAppointment={this.state.selectedAppointment} handleEditFormSubmit={this.props.handleEditFormSubmit} openPortal={this.openPortal}/> : null}

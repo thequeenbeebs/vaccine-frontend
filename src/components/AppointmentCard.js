@@ -8,17 +8,19 @@ const AppointmentCard = ({ appointment, toggleModal, setSelectedAppointment, ope
     const dateTime = utcToZonedTime(new Date(appointment.appointment_time), 'America/Chicago')
     
     return (
-        <div>
+        <div className="main-container">
             <h3>{format(dateTime, 'MMMM dd, Y h:mmaaa')}</h3> 
             <h4>{center.name}</h4>
             <p>{center.address}</p>
             <p>{center.city} {center.state} {center.zip_code}</p>
             <p>{center.phone_number}</p>
-            <Button onClick={() => {
+            <Button variant="outlined"
+                onClick={() => {
                 setSelectedAppointment(appointment)
                 openEditForm()
             }}>Edit</Button>
-            <Button onClick={() => {
+            <Button variant="outlined"
+                onClick={() => {
                 toggleModal()
                 setSelectedAppointment(appointment)
             }}>Cancel</Button>

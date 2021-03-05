@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, TextField } from '@material-ui/core';
 
 const validateEmail = email => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -87,27 +88,34 @@ const validateForm = (errors) => {
             <div>
                 <h2>Register for COVID-19 Vaccine</h2>
                 <form onSubmit={this.handleSubmit} noValidate>
-                    <label>First Name:</label><br/>
-                    <input type="text" name="first_name"
-                        onChange={(e) => this.handleChange(e)} noValidate></input><br/>
+                    <TextField type="text" 
+                        label="First Name"
+                        name="first_name"
+                        onChange={(e) => this.handleChange(e)} noValidate></TextField><br/>
                     {errors.first_name.length > 0 && <span className='error'>{errors.first_name}</span>}<br/>
-                    <label>Last Name:</label><br/>
-                    <input type="text" name="last_name"
-                        onChange={(e) => this.handleChange(e)} noValidate></input><br/>
+                    <TextField 
+                        type="text" 
+                        label="Last Name"
+                        name="last_name"
+                        onChange={(e) => this.handleChange(e)} noValidate></TextField><br/>
                     {errors.last_name.length > 0 && <span className='error'>{errors.last_name}</span>}<br/>
-                    <label>Phone Number:</label><br/>
-                    <input type="text" name="phone_number"
-                        onChange={(e) => this.handleChange(e)} noValidate></input><br/>
+                    <TextField type="text" 
+                        name="phone_number"
+                        label="Phone Number"
+                        onChange={(e) => this.handleChange(e)} noValidate></TextField><br/>
                     {errors.phone_number.length > 0 && <span className='error'>{errors.phone_number}</span>}<br/>
-                    <label>E-mail Address:</label><br/>
-                    <input type="text" name="email"
-                        onChange={(e) => this.handleChange(e)} noValidate></input><br/>
+                    <TextField type="text" 
+                        name="email"
+                        label="Email Address"
+                        onChange={(e) => this.handleChange(e)} noValidate></TextField><br/>
                     {errors.email.length > 0 && <span className='error'>{errors.email}</span>}<br/>
-                    <label>Password:</label><br/>
-                    <input type="password" name="password"
-                        onChange={(e) => this.handleChange(e)} noValidate></input><br/>
+                    <TextField type="password" 
+                        name="password"
+                        label="Password"
+                        onChange={(e) => this.handleChange(e)} noValidate></TextField><br/>
                     {errors.password.length > 0 && <span className='error'>{errors.password}</span>}<br/>
-                    <input type="submit"></input>
+                    <Button type="submit"
+                        variant="outlined">Submit</Button>
                 </form>
             </div>
         )
