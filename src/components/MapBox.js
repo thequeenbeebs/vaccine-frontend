@@ -2,16 +2,22 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import Location from './Location';
-// import turf from 'turf-jsts'
+import turf from 'turf-jsts';
+import Geocoder from "react-map-gl-geocoder";
+import ReactMapbox from './ReactMapbox';
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcXVlZW5iZWVicyIsImEiOiJja2xpaWI2am8wMXdxMnZsanpncjZza2dqIn0.Y_gIhyTKN5URI1TOxbKfiQ';
 
 class MapBox extends React.Component {
     state = {
-        map: ""
+        map: "",
+        locations: ""
     }
 
     componentDidMount() {
+        this.setState({locations: this.props.locations})
+
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
@@ -34,7 +40,8 @@ class MapBox extends React.Component {
             });
             
             map.addControl(geocoder, 'top-left');
-    
+
+            // geocoder.on('result', (ev) => {this.findDistance(ev)});
         })
 
         this.setState({
@@ -93,6 +100,19 @@ class MapBox extends React.Component {
       })
     }
 
+    // findDistance = (ev) => {
+    //   var searchResult = ev.result.geometry;
+    //   var options = { units: 'miles' };
+    //   this.props.locations.features.forEach(function(store) {
+    //     Object.defineProperty(store.properties, 'distance', {
+    //       value: turf.distance(searchResult, store.geometry, options),
+    //       writable: true,
+    //       enumerable: true,
+    //       configurable: true
+    //     });
+    //   });
+    // }
+
     render() {
         return (
             <div className="map-container">
@@ -104,7 +124,8 @@ class MapBox extends React.Component {
                         {this.props.locations.features ? this.props.locations.features.map(store => <Location store={store} key={store.properties.id} handleClick={this.handleClick} chooseLocation={this.props.chooseLocation}/>) : null}
                     </div>
                 </div>
-                <div id="map" className="map"></div>
+                <div id="map" className="map">
+                </div>
             </div>
             
         )

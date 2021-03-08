@@ -125,7 +125,7 @@ class App extends React.Component {
       appointment: {
         patient_id: this.state.currentPatient.id,
         vaccination_center_id: inputs.location.properties.id,
-        vaccine_id: 11,//hard coded to Moderna - need to fix later
+        // vaccine_id: 11,//hard coded to Moderna - need to fix later
         appointment_time: new Date(inputs.time)
     }}
 
@@ -160,7 +160,7 @@ class App extends React.Component {
       appointment: {
         patient_id: this.state.currentPatient.id,
         vaccination_center_id: data.location.properties.id,
-        vaccine_id: 11, //this one is hard coded too
+        // vaccine_id: 11, //this one is hard coded too
         appointment_time: data.time
     }}
 

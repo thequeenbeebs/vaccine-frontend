@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import ReactMapbox from './components/ReactMapbox';
 
 const theme = createMuiTheme({
   palette: {
@@ -12,10 +13,9 @@ const theme = createMuiTheme({
         main: "#4470AD" 
                },
      secondary: {
-        main: "#ffcc80" //Another orange-ish color
+        main: "#ffcc80"
                 }
            }
-  // as an aside, highly recommend importing roboto font for Material UI projects! Looks really nice
 });
 
 ReactDOM.render(

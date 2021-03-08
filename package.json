@@ -22,6 +22,8 @@
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-map-gl": "^6.1.10",
+    "react-map-gl-geocoder": "^2.1.6",
     "react-nice-dates": "^3.0.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
