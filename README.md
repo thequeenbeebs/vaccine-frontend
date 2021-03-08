@@ -8,9 +8,16 @@
 ## About the App
 This is my Flatiron School capstone project, a culmination of 15 weeks of learning. This application has a Ruby on Rails backend with a JavaScript frontend, using React as a framework. Styling was done with a combination of Material UI and CSS. 
 
-## Advanced Tech Used:
+## Advanced Tech Used
 1. Map: MapBox API
 2. Authorization: JWT and bcrypt 
 3. Datepicker: @material-ui/pickers
 4. Date Utility Library: date-fns
+
+## Continuing Goals
+1. Work on ADA Accessibility
+2. Update MapBox API to use ReactMapGL for cleaner functionality
+3. Add a waitlist for vaccination centers
+4. Testing
+5. Emails with appointment confirmation
 
