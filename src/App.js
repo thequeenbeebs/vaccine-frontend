@@ -16,7 +16,7 @@ class App extends React.Component {
 
   componentDidMount() {
     if(localStorage.getItem("token")) {
-      fetch('http://localhost:3000/decode_token', {
+      fetch('https://vaccine-hub-api.herokuapp.com/decode_token', {
         headers: {
           "Authenticate": localStorage.token
         }
@@ -25,11 +25,11 @@ class App extends React.Component {
         .then(patientData => this.setState({currentPatient: patientData}))
     }
 
-    fetch('http://localhost:3000/vaccines')
+    fetch('https://vaccine-hub-api.herokuapp.com/vaccines')
       .then(resp => resp.json())
       .then(vaxData => this.setState({vaccines: vaxData}))
 
-    fetch('http://localhost:3000/vaccination_centers')
+    fetch('https://vaccine-hub-api.herokuapp.com/vaccination_centers')
     .then(resp => resp.json())
     .then(locationData => {
       const parsedLocations = {
@@ -78,7 +78,7 @@ class App extends React.Component {
           password: state.password
         })
 
-    fetch('http://localhost:3000/login', reqPack)
+    fetch('https://vaccine-hub-api.herokuapp.com/login', reqPack)
         .then(resp => resp.json())
         .then(data => {
           if (data.error_message) {
@@ -100,7 +100,7 @@ class App extends React.Component {
         reqPack.method = "POST"
         reqPack.headers = {"Content-Type": "application/json"}
     
-    fetch('http://localhost:3000/patients', reqPack)
+    fetch('https://vaccine-hub-api.herokuapp.com/patients', reqPack)
       .then(resp => resp.json())
       .then(data => { 
         if (data.error_message) {
@@ -134,7 +134,7 @@ class App extends React.Component {
         reqPack.method = "POST"
         reqPack.headers = {"Content-Type": "application/json"}
     
-    fetch('http://localhost:3000/appointments', reqPack)
+    fetch('https://vaccine-hub-api.herokuapp.com/appointments', reqPack)
       .then(resp => resp.json())
       .then(appointmentData => this.setState({
         currentPatient: {
@@ -144,7 +144,7 @@ class App extends React.Component {
   }
 
   cancelAppointment = (appointment) => {
-    fetch(`http://localhost:3000/appointments/${appointment.id}`, {method: 'DELETE'})
+    fetch(`https://vaccine-hub-api.herokuapp.com/appointments/${appointment.id}`, {method: 'DELETE'})
 
     this.setState({
       currentPatient: {
@@ -169,7 +169,7 @@ class App extends React.Component {
         reqPack.method = "PATCH"
         reqPack.headers = {"Content-Type": "application/json"}
 
-    fetch(`http://localhost:3000/appointments/${data.selectedAppointment.id}`, reqPack)
+    fetch(`https://vaccine-hub-api.herokuapp.com/appointments/${data.selectedAppointment.id}`, reqPack)
       .then(resp => resp.json())
       .then(appointmentData => this.setState({
         currentPatient: {
