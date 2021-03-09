@@ -2,11 +2,11 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import Location from './Location';
-import turf from 'turf-jsts';
-import Geocoder from "react-map-gl-geocoder";
-import ReactMapbox from './ReactMapbox';
+// import turf from 'turf-jsts';
+// import Geocoder from "react-map-gl-geocoder";
+// import ReactMapbox from './ReactMapbox';
 
-
+// mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhlcXVlZW5iZWVicyIsImEiOiJja2xpaWI2am8wMXdxMnZsanpncjZza2dqIn0.Y_gIhyTKN5URI1TOxbKfiQ';
 
 class MapBox extends React.Component {

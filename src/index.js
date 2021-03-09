@@ -5,7 +5,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import ReactMapbox from './components/ReactMapbox';
 
 const theme = createMuiTheme({
   palette: {
