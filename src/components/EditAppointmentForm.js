@@ -96,7 +96,7 @@ class EditAppointmentForm extends React.Component {
     }
 
     disabledDates = (date) => {
-        let location = this.props.location
+        let location = this.state.location
         let daysClosed = location.properties.daysClosed.map(day => parseInt(day))
         return daysClosed.includes(getDay(date))
     }
