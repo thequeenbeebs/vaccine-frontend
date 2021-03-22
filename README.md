@@ -1,23 +1,25 @@
 # Welcome to Harris County Vaccine Hub!
+>This is my Flatiron School capstone project, a culmination of 15 weeks of learning. This application has a Ruby on Rails backend with a JavaScript frontend, using React as a framework. Styling was done with a combination of Material UI and CSS. 
+
+## Technologies
+* Map: MapBox API
+* Authorization: JWT and bcrypt 
+* Datepicker: @material-ui/pickers
+* Date Utility Library: date-fns
+
+## Demo
+* Video Demo: https://youtu.be/hhK7M_CAPAU
+* Heroku Deployment: https://vaccine-hub.herokuapp.com/
 
 ## Set Up
-1. Go to the vaccine-backend file and follow instructions.
-2. Once you've done that and have the backend up and running, type `npm install` in the terminal and hit enter.
-3. Do the same with `npm start`. You will be prompted to run the app on another port because 3000 is full. Type `Y` for yes.
-
-## About the App
-This is my Flatiron School capstone project, a culmination of 15 weeks of learning. This application has a Ruby on Rails backend with a JavaScript frontend, using React as a framework. Styling was done with a combination of Material UI and CSS. 
-
-## Advanced Tech Used
-1. Map: MapBox API
-2. Authorization: JWT and bcrypt 
-3. Datepicker: @material-ui/pickers
-4. Date Utility Library: date-fns
+* Go to the vaccine-backend file and follow instructions.
+* Once you've done that and have the backend up and running, type `npm install` in the terminal and hit enter.
+* Do the same with `npm start`. You will be prompted to run the app on another port because 3000 is full. Type `Y` for yes.
 
 ## Continuing Goals
-1. Work on ADA Accessibility
-2. Update MapBox API to use ReactMapGL for cleaner functionality
-3. Add a waitlist for vaccination centers
-4. Testing
-5. Emails with appointment confirmation
+* Work on ADA Accessibility
+* Update MapBox API to use ReactMapGL for cleaner functionality
+* Add a waitlist for vaccination centers
+* Testing
+* Emails with appointment confirmation
 
