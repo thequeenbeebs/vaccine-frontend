@@ -12,7 +12,7 @@
 * Heroku Deployment: https://vaccine-hub.herokuapp.com/
 
 ## Set Up
-* Go to the vaccine-backend file and follow instructions.
+* Go to https://github.com/thequeenbeebs/vaccine-backend and follow instructions.
 * Once you've done that and have the backend up and running, type `npm install` in the terminal and hit enter.
 * Do the same with `npm start`. You will be prompted to run the app on another port because 3000 is full. Type `Y` for yes.
 
