@@ -1,5 +1,5 @@
 # Welcome to Harris County Vaccine Hub!
->This is my Flatiron School capstone project, a culmination of 15 weeks of learning. This application has a Ruby on Rails backend with a JavaScript frontend, using React as a framework. Styling was done with a combination of Material UI and CSS. 
+>This is my Flatiron School capstone project, a culmination of 15 weeks of learning. Inspired by my own frustration with registering for the COVID-19 vaccination, I decided to create an application that would be a one stop shop for residents of the Houston area to register for vaccine appointments. This project uses Ruby on Rails on the back-end and JavaScript and React on the front-end, as well as Material-UI for styling, JWT for authentication, and the MapBox API for generating a custom map.  
 
 ## Technologies
 * Map: MapBox API
